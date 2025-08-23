@@ -244,6 +244,84 @@ If this work contributes to your research, please cite:
 
 ---
 
+## 📊 Sample Output
+
+```
+==================================================
+          SMART TSP ALGORITHMS BENCHMARK          
+==================================================
+Cities:         100
+Seed:           123
+Generation:     cluster
+Post-opt:       OFF
+Algorithms:    
+  - Angular-radial v1: sort_by=angle_distance, look_ahead=1001, max_2opt_iter=1001
+  - Angular-radial v2: sort_by=angle_distance, look_ahead=1000, max_2opt_iter=1001
+  - Dynamic-gravity v1: delta=0.5, fast_2opt_iter=1001
+  - Dynamic-gravity v2: delta=0.5, fast_2opt_iter=1001
+  - Greedy v2: start_point=0
+==================================================
+
+
+==================================================
+Running Angular-radial v1 algorithm...
+Description: Angular-radial v1
+Parameters: sort_by=angle_distance, look_ahead=1001, max_2opt_iter=1001
+Completed in 0.0842 seconds
+Route length: 553.66
+==================================================
+
+==================================================
+Running Angular-radial v2 algorithm...
+Description: Angular-radial v2
+Parameters: sort_by=angle_distance, look_ahead=1000, max_2opt_iter=1001
+Completed in 0.0088 seconds
+Route length: 553.66
+==================================================
+
+==================================================
+Running Dynamic-gravity v1 algorithm...
+Description: Dynamic gravity v1
+Parameters: delta=0.5, fast_2opt_iter=1001
+Completed in 0.0075 seconds
+Route length: 567.00
+==================================================
+
+==================================================
+Running Dynamic-gravity v2 algorithm...
+Description: Dynamic gravity v2
+Parameters: delta=0.5, fast_2opt_iter=1001
+Completed in 0.0073 seconds
+Route length: 534.90
+==================================================
+
+==================================================
+Running Greedy v2 algorithm...
+Description: Classic greedy TSP algorithm
+Parameters: start_point=0
+Completed in 0.0016 seconds
+Route length: 609.21
+==================================================
+
+==============================================================================================================================
+                                                DETAILED ALGORITHM COMPARISON                                                 
+==============================================================================================================================
+Algorithm            | Time (s) |  vs Best  | Length | vs Best | Params                                                       
+------------------------------------------------------------------------------------------------------------------------------
+Greedy v2            | 0.0016 | BEST | 609.21 | +13.89% | start_point=0                                                
+Dynamic-gravity v2   | 0.0073 | +348.65%  | 534.90 | BEST | delta=0.5, fast_2opt_iter=1001                               
+Dynamic-gravity v1   | 0.0075 | +361.28%  | 567.00 | +6.00%  | delta=0.5, fast_2opt_iter=1001                               
+Angular-radial v2    | 0.0088 | +441.26%  | 553.66 | +3.51%  | sort_by=angle_distance, look_ahead=1000, max_2opt_iter=1001  
+Angular-radial v1    | 0.0842 | +5064.72% | 553.66 | +3.51%  | sort_by=angle_distance, look_ahead=1001, max_2opt_iter=1001  
+==============================================================================================================================
+
+PERFORMANCE ANALYSIS:
+- Fastest algorithm(s): Greedy v2 (0.0016 sec)
+- Shortest route(s): Dynamic-gravity v2 (534.90 units)
+```
+
+---
+
 **Disclaimer:** Performance results shown are for clustered distributions. 
 Results may vary based on spatial characteristics. 
 Always evaluate algorithms on your specific problem domains.
