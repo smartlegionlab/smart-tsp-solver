@@ -77,6 +77,8 @@ route = angular_radial_tsp_v2(cities, look_ahead=1000, max_2opt_iter=100)
 ```bash
 git clone https://github.com/smartlegionlab/smart-tsp-heuristics.git
 cd smart-tsp-heuristics
+python -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 
@@ -132,7 +134,7 @@ Create configuration file tsp_config.json:
 }
 ```
 
-`python main.py`
+- `python main.py`
 
 ## 📊 Comprehensive Performance Analysis
 
