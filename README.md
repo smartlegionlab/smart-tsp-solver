@@ -132,6 +132,8 @@ Create configuration file tsp_config.json:
 }
 ```
 
+`python main.py`
+
 ## 📊 Comprehensive Performance Analysis
 
 ### Experimental Results
