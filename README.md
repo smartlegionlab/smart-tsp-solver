@@ -57,7 +57,15 @@ This ensures fair comparison against a professionally implemented baseline rathe
 pip install smart-tsp-solver
 ```
 
-### Usage example
+## 🚀 Usage
+
+```bash
+git clone https://github.com/smartlegionlab/smart-tsp-solver.git
+cd smart-tsp-solver
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
 
 Example of creating a configuration file `tsp_config.json`:
 
@@ -110,6 +118,8 @@ Example of creating a configuration file `tsp_config.json`:
   }
 }
 ```
+
+- `python main.py`
 
 ### Launch using [Smart TSP Benchmark](https://github.com/smartlegionlab/smart-tsp-benchmark) 
 

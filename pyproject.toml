@@ -26,4 +26,4 @@ Homepage = "https://github.com/smartlegionlab/smart-tsp-solver"
 
 [tool.setuptools.packages.find]
 where = ["."]
-where = ["smart_tsp_solver"]
+where = ["smart_tsp_solver*"]
