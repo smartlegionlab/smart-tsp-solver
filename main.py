@@ -12,45 +12,79 @@ from smart_tsp_solver.algorithms.other.greedy.v2.greedy_v2 import greedy_tsp_v2
 
 
 def main():
-    algorithms = {
-        'Angular-radial v1': AlgorithmConfig(
+    config = {
+        'n_dots': 1001,
+        'seed': 123,
+        'dot_generation': 'random',
+        'use_post_optimization': False,
+        'plot_results': True,
+        'verbose': True
+    }
+    benchmark = TSPBenchmark(config=config)
+    benchmark.add_algorithm(
+        name='Angular-radial v1',
+        config=AlgorithmConfig(
             function=angular_radial_tsp_v1,
-            params={},
+            params={
+                "sort_by": "angle_distance",
+                "look_ahead": 1001,
+                "max_2opt_iter": 1001
+            },
             post_optimize=True,
             description="Angular-radial v1",
             is_class=False
-        ),
-        'Angular-radial v2': AlgorithmConfig(
+        )
+    )
+    benchmark.add_algorithm(
+        name='Angular-radial v2',
+        config=AlgorithmConfig(
             function=angular_radial_tsp_v2,
-            params={},
+            params={
+                "sort_by": "angle_distance",
+                "look_ahead": 1001,
+                "max_2opt_iter": 1001
+            },
             post_optimize=True,
             description="Angular-radial v2",
             is_class=False
-        ),
-        'Dynamic-gravity v1': AlgorithmConfig(
+        )
+    )
+    benchmark.add_algorithm(
+        name='Dynamic-gravity v1',
+        config=AlgorithmConfig(
             function=dynamic_gravity_tsp_v1,
-            params={},
+            params={
+                "delta": 0.5,
+                "fast_2opt_iter": 1001
+            },
             post_optimize=True,
-            description="Dynamic gravity v1",
-            is_class=False,
-        ),
-        'Dynamic-gravity v2': AlgorithmConfig(
+            description="Dynamic-gravity v1",
+            is_class=False
+        )
+    )
+    benchmark.add_algorithm(
+        name='Dynamic-gravity v2',
+        config=AlgorithmConfig(
             function=dynamic_gravity_tsp_v2,
-            params={},
+            params={
+                "delta": 0.5,
+                "fast_2opt_iter": 1001
+            },
             post_optimize=True,
-            description="Dynamic gravity v2",
-            is_class=False,
-        ),
-        'Greedy v2': AlgorithmConfig(
+            description="Dynamic-gravity v2",
+            is_class=False
+        )
+    )
+    benchmark.add_algorithm(
+        name='Greedy v2',
+        config=AlgorithmConfig(
             function=greedy_tsp_v2,
             params={},
             post_optimize=False,
             description="Classic greedy TSP algorithm",
             is_class=False,
-        ),
-    }
-    benchmark = TSPBenchmark(config_path='tsp_config.json')
-    benchmark.algorithms = algorithms
+        )
+    )
     benchmark.run_benchmark()
 
 

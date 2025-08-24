@@ -1,4 +1,4 @@
-# Smart TSP Solver
+# Smart TSP Solver <sup>v0.1.3</sup>
 
 ---
 
@@ -33,11 +33,44 @@ clustered data while maintaining practical computational efficiency.
 
 ## 🔬 Scientific Foundation
 
-### Algorithmic Innovations
+---
 
-**Dynamic Gravity Approach:** Models city selection using principles of physical attraction and momentum conservation, creating smoother paths that minimize cross-cluster backtracking.
+## 🧠 Algorithmic Innovations
 
-**Angular-Radial Method:** Employs polar coordinate transformation with intelligent sector prioritization, significantly reducing search space for clustered distributions.
+Library implements two advanced heuristic approaches, each tackling the classic speed-quality trade-off in a unique way.
+
+### 🧲 Dynamic Gravity Approach
+
+**Complexity:** `O(n²)`
+
+**Concept:** This algorithm models a physical process of attraction, where the next point is selected based on a combination of proximity and current direction of movement. The `delta` parameter acts as an "inertia coefficient," preventing sharp turns and creating smooth, natural-looking routes.
+
+| Strengths | Ideal Use Case |
+| :--- | :--- |
+| • Predictable execution time<br>• Consistently high solution quality<br>• Efficient cluster traversal | The balance of speed and quality, processing medium-sized datasets |
+
+### 📐 Angular-Radial Method
+
+**Complexity:** `O(n²)` *with near O(n·log n) practical performance*
+
+**Concept:** A "smart look-ahead" strategy (`look_ahead`). Points are pre-sorted in a polar coordinate system, which drastically narrows the search space for each subsequent choice. This is equivalent to a navigator scanning the nearest sector on the horizon instead of re-examining the entire map every time.
+
+| Strengths | Ideal Use Case |
+| :--- | :--- |
+| • Best-in-class final route quality<br>• Near-linear practical performance<br>• Exceptional efficiency on clustered data | Offline calculations where route length is critical and tasks require scaling |
+
+### Performance Comparison
+
+| Algorithm | Complexity | Quality | Speed | Primary Use Case |
+| :--- | :--- | :--- | :--- | :--- |
+| **Greedy v2** | `O(n²)` | ███░░ | █████ | Real-time, microseconds |
+| **Dynamic-gravity v2** | `O(n²)` | █████ | ████░ | Balanced, milliseconds |
+| **Angular-radial v2** | `O(n²)`* | █████ | ███░░ | Quality, offline |
+
+*Practical performance approaches O(n·log n) due to spatial heuristics.*
+*Worst-case complexity. Practical performance is near O(n·log n) due to spatial heuristics
+
+---
 
 ### Benchmarking Methodology
 
@@ -57,71 +90,9 @@ This ensures fair comparison against a professionally implemented baseline rathe
 pip install smart-tsp-solver
 ```
 
-## 🚀 Usage
+### Example
 
-```bash
-git clone https://github.com/smartlegionlab/smart-tsp-solver.git
-cd smart-tsp-solver
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-```
-
-Example of creating a configuration file `tsp_config.json`:
-
-```json
-{
-  "algorithms": {
-    "Angular-radial v1": {
-      "enabled": true,
-      "params": {
-        "sort_by": "angle_distance",
-        "look_ahead": 100,
-        "max_2opt_iter": 100
-      }
-    },
-    "Angular-radial v2": {
-      "enabled": true,
-      "params": {
-        "sort_by": "angle_distance",
-        "look_ahead": 100,
-        "max_2opt_iter": 100
-      }
-    },
-    "Dynamic-gravity v1": {
-      "enabled": true,
-      "params": {
-        "delta": 0.5,
-        "fast_2opt_iter": 100
-      }
-    },"Dynamic-gravity v2": {
-      "enabled": true,
-      "params": {
-        "delta": 0.5,
-        "fast_2opt_iter": 100
-      }
-    },
-    "Greedy v2": {
-      "enabled": true,
-      "params": {
-        "start_point": 0
-      }
-    }
-  },
-  "benchmark": {
-    "n_cities": 100,
-    "seed": 123,
-    "city_generation": "cluster",
-    "use_post_optimization": false,
-    "plot_results": false,
-    "verbose": true
-  }
-}
-```
-
-- `python main.py`
-
-### Launch using [Smart TSP Benchmark](https://github.com/smartlegionlab/smart-tsp-benchmark) 
+### Launch using [Smart TSP Benchmark](https://github.com/smartlegionlab/smart-tsp-benchmark)
 
 ```python
 from smart_tsp_benchmark.tsp_benchmark import TSPBenchmark, AlgorithmConfig
@@ -134,45 +105,79 @@ from smart_tsp_solver.algorithms.other.greedy.v2.greedy_v2 import greedy_tsp_v2
 
 
 def main():
-    algorithms = {
-        'Angular-radial v1': AlgorithmConfig(
+    config = {
+        'n_dots': 1001,
+        'seed': 123,
+        'dot_generation': 'random',
+        'use_post_optimization': False,
+        'plot_results': True,
+        'verbose': True
+    }
+    benchmark = TSPBenchmark(config=config)
+    benchmark.add_algorithm(
+        name='Angular-radial v1',
+        config=AlgorithmConfig(
             function=angular_radial_tsp_v1,
-            params={},
+            params={
+                "sort_by": "angle_distance",
+                "look_ahead": 1001,
+                "max_2opt_iter": 1001
+            },
             post_optimize=True,
             description="Angular-radial v1",
             is_class=False
-        ),
-        'Angular-radial v2': AlgorithmConfig(
+        )
+    )
+    benchmark.add_algorithm(
+        name='Angular-radial v2',
+        config=AlgorithmConfig(
             function=angular_radial_tsp_v2,
-            params={},
+            params={
+                "sort_by": "angle_distance",
+                "look_ahead": 1001,
+                "max_2opt_iter": 1001
+            },
             post_optimize=True,
             description="Angular-radial v2",
             is_class=False
-        ),
-        'Dynamic-gravity v1': AlgorithmConfig(
+        )
+    )
+    benchmark.add_algorithm(
+        name='Dynamic-gravity v1',
+        config=AlgorithmConfig(
             function=dynamic_gravity_tsp_v1,
-            params={},
+            params={
+                "delta": 0.5,
+                "fast_2opt_iter": 1001
+            },
             post_optimize=True,
-            description="Dynamic gravity v1",
-            is_class=False,
-        ),
-        'Dynamic-gravity v2': AlgorithmConfig(
+            description="Dynamic-gravity v1",
+            is_class=False
+        )
+    )
+    benchmark.add_algorithm(
+        name='Dynamic-gravity v2',
+        config=AlgorithmConfig(
             function=dynamic_gravity_tsp_v2,
-            params={},
+            params={
+                "delta": 0.5,
+                "fast_2opt_iter": 1001
+            },
             post_optimize=True,
-            description="Dynamic gravity v2",
-            is_class=False,
-        ),
-        'Greedy v2': AlgorithmConfig(
+            description="Dynamic-gravity v2",
+            is_class=False
+        )
+    )
+    benchmark.add_algorithm(
+        name='Greedy v2',
+        config=AlgorithmConfig(
             function=greedy_tsp_v2,
             params={},
             post_optimize=False,
             description="Classic greedy TSP algorithm",
             is_class=False,
-        ),
-    }
-    benchmark = TSPBenchmark(config_path='tsp_config.json')
-    benchmark.algorithms = algorithms
+        )
+    )
     benchmark.run_benchmark()
 
 
@@ -182,47 +187,66 @@ if __name__ == '__main__':
 ```
 
 
-## 📊 Comprehensive Performance Analysis
+## 🚀 Usage
 
-Use [Smart TSP Benchmark](https://github.com/smartlegionlab/smart-tsp-benchmark) 
+```bash
+git clone https://github.com/smartlegionlab/smart-tsp-solver.git
+cd smart-tsp-solver
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python main.py
+```
+
+
+## 📊 Comprehensive Performance Analysis
 
 ### Experimental Results
 
-Our benchmarking reveals sophisticated performance characteristics across different problem scales:
+### 📊 Smart TSP Algorithms Benchmark Report
 
-#### 🔵 Dataset: 100 Points (Clustered Distribution)
-| Algorithm | Time (s) | Δ Time | Route Length | Δ Length | Parameters |
+Our comprehensive benchmarking reveals a clear performance-quality tradeoff across different problem scales, highlighting the strengths of each algorithm.
+
+#### 🔵 Dataset: 100 Points (Random Distribution)
+
+**Key Insight:** For small-scale problems, the **Dynamic-gravity v2** algorithm demonstrates the best balance, achieving near-optimal path quality while maintaining near-real-time performance.
+
+| Algorithm | Time (s) | Δ vs Best | Route Length | Δ vs Best | Parameters |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| Greedy v2 | 0.0016 | **BEST** | 609.21 | +13.89% | `start_point=0` |
-| **Dynamic-gravity v2** | 0.0073 | +348% | **534.90** | **BEST** | `delta=0.5` |
-| Angular-radial v2 | 0.0088 | +441% | 553.66 | +3.51% | `look_ahead=1000` |
+| Greedy v2 | **0.0015** | **BASELINE** | 1026.37 | +20.66% | `start_point=0` |
+| Dynamic-gravity v1 | 0.0071 | +367% | 850.86 | +0.03% | `delta=0.5` |
+| **Dynamic-gravity v2** | 0.0071 | +367% | 856.14 | +0.65% | `delta=0.5` |
+| Angular-radial v2 | 0.0086 | +469% | **850.62** | **BASELINE** | `look_ahead=100` |
+| Angular-radial v1 | 0.0812 | +5243% | **850.62** | **BASELINE** | `look_ahead=100` |
 
-**Analysis:** For smaller clusters, `Dynamic-gravity v2` achieves **optimal path quality** while maintaining near-real-time performance.
+#### 🔴 Dataset: 1001 Points (Large Random Distribution)
 
-#### 🔴 Dataset: 1001 Points (Large Clustered Distribution)
-| Algorithm | Time (s) | Δ Time | Route Length | Δ Length | Parameters |
+**Key Insight:** For large-scale problems, **Angular-radial v2** becomes the undisputed leader in solution quality (providing a **17.3%** shorter route than the Greedy algorithm). Its acceptable processing time makes it ideal for quality-sensitive offline applications.
+
+| Algorithm | Time (s) | Δ vs Best | Route Length | Δ vs Best | Parameters |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| Greedy v2 | 0.0022 | **BEST** | 1612.74 | +16.12% | `start_point=0` |
-| Dynamic-gravity v2 | 0.0248 | +1016% | 1485.03 | +6.93% | `delta=0.5` |
-| **Angular-radial v2** | 0.1263 | +5590% | **1388.82** | **BEST** | `look_ahead=1000` |
+| Greedy v2 | **0.0023** | **BASELINE** | 2985.82 | +17.31% | `start_point=0` |
+| Dynamic-gravity v2 | 0.0186 | +696% | 2726.36 | +7.12% | `delta=0.5` |
+| Dynamic-gravity v1 | 0.0321 | +1269% | 2837.78 | +11.50% | `delta=0.5` |
+| **Angular-radial v2** | 0.1346 | +5647% | **2545.21** | **BASELINE** | `look_ahead=1001` |
+| Angular-radial v1 | 0.2555 | +10809% | **2545.21** | **BASELINE** | `look_ahead=1001` |
 
-**Analysis:** For large-scale problems, `Angular-radial v2` delivers **superior path quality** (16% improvement over greedy) making it ideal for quality-sensitive applications.
+### 🎯 Key Insights & Analysis
 
-### Key Insights
+1.  **Algorithm Evolution (v1 vs. v2):**
+    *   **Angular-radial v2** shows a **~2x speedup** over v1 while delivering identical, best-in-class route quality.
+    *   **Dynamic-gravity v2** also demonstrates a significant speed improvement (nearly 2x on 1001 points) over v1, maintaining consistently high solution quality with better stability.
 
-1.  **Algorithmic Evolution:** Version 2 implementations demonstrate significant improvements:
-    - `Angular-radial v2`: **2× speedup** over v1 with identical quality
-    - `Dynamic-gravity v2`: Consistent quality improvements with better stability
+2.  **Algorithm Characteristics:**
+    *   **Greedy v2:** Extremely fast (`O(n²)`), ideal for real-time applications, but sacrifices solution quality (+17-20% longer routes).
+    *   **Dynamic-gravity:** Offers significantly better quality than the greedy approach. It has `O(n²)` complexity with higher constant factors, making it the optimal choice for medium-sized problems where a balance between speed and quality is required.
+    *   **Angular-radial:** The quality leader. Its use of spatial partitioning (`O(n log n)`) allows it to scale best on large datasets. It is the recommended choice for offline processing where final route cost is the primary concern.
 
-2.  **Scalability Characteristics:** 
-    - Greedy: O(n²) time complexity, minimal constant factors
-    - Dynamic-gravity: O(n²) with higher constants but better quality
-    - Angular-radial: O(n log n) for spatial partitioning, excels on large datasets
-
-3.  **Quality-Speed Tradeoff:** The library provides a continuum of solutions:
-    - **Microsecond response:** Greedy for real-time applications
-    - **Millisecond response:** Dynamic-gravity for balanced needs  
-    - **Best quality:** Angular-radial for offline processing
+3.  **Practical Recommendations:**
+    The library provides a continuum of solutions for different use cases:
+    *   **Microsecond Response:** **Greedy v2** for interactive and real-time systems.
+    *   **Millisecond Response:** **Dynamic-gravity v2** for balanced needs and medium-scale problems.
+    *   **Best Quality:** **Angular-radial v2** for final calculations and offline processing where route cost is paramount.
 
 ## 🎨 Advanced Visualization
 
@@ -238,19 +262,6 @@ Our benchmarking reveals sophisticated performance characteristics across differ
 - **Memory Efficiency:** Pre-allocated arrays and minimal copying
 - **Cache Optimization:** Intelligent memoization and reuse
 - **Vectorized Operations:** NumPy-based efficient computations
-
-## 📈 Usage Recommendations
-
-### Based on Empirical Results
-
-| Use Case | Recommended Algorithm | Rationale |
-| :--- | :--- | :--- |
-| Real-time applications | `Greedy v2` | Sub-millisecond response for 1000+ points |
-| General-purpose routing | `Dynamic-gravity v2` | Excellent quality-speed balance |
-| High-quality requirements | `Angular-radial v2` | 16% quality improvement over greedy |
-| Clustered distributions | `Angular-radial v2` | Superior spatial partitioning |
-| Uniform distributions | `Dynamic-gravity v2` | Consistent performance across layouts |
-
 
 ---
 
@@ -299,131 +310,131 @@ If this work contributes to your research, please cite:
 ==================================================
           SMART TSP ALGORITHMS BENCHMARK          
 ==================================================
-Cities:         100
+Dots:           100
 Seed:           123
-Generation:     cluster
+Generation:     random
 Post-opt:       OFF
 Algorithms:    
-  - Angular-radial v1: sort_by=angle_distance, look_ahead=1001, max_2opt_iter=1001
-  - Angular-radial v2: sort_by=angle_distance, look_ahead=1000, max_2opt_iter=1001
-  - Dynamic-gravity v1: delta=0.5, fast_2opt_iter=1001
-  - Dynamic-gravity v2: delta=0.5, fast_2opt_iter=1001
-  - Greedy v2: start_point=0
+  - Angular-radial v1: 
+  - Angular-radial v2: 
+  - Dynamic-gravity v1: 
+  - Dynamic-gravity v2: 
+  - Greedy v2: 
 ==================================================
 
 
 ==================================================
 Running Angular-radial v1 algorithm...
 Description: Angular-radial v1
-Parameters: sort_by=angle_distance, look_ahead=1001, max_2opt_iter=1001
-Completed in 0.0842 seconds
-Route length: 553.66
+Parameters: 
+Completed in 0.0812 seconds
+Route length: 850.62
 ==================================================
 
 ==================================================
 Running Angular-radial v2 algorithm...
 Description: Angular-radial v2
-Parameters: sort_by=angle_distance, look_ahead=1000, max_2opt_iter=1001
-Completed in 0.0088 seconds
-Route length: 553.66
+Parameters: 
+Completed in 0.0086 seconds
+Route length: 850.62
 ==================================================
 
 ==================================================
 Running Dynamic-gravity v1 algorithm...
-Description: Dynamic gravity v1
-Parameters: delta=0.5, fast_2opt_iter=1001
-Completed in 0.0075 seconds
-Route length: 567.00
+Description: Dynamic-gravity v1
+Parameters: 
+Completed in 0.0071 seconds
+Route length: 850.86
 ==================================================
 
 ==================================================
 Running Dynamic-gravity v2 algorithm...
-Description: Dynamic gravity v2
-Parameters: delta=0.5, fast_2opt_iter=1001
-Completed in 0.0073 seconds
-Route length: 534.90
+Description: Dynamic-gravity v2
+Parameters: 
+Completed in 0.0071 seconds
+Route length: 856.14
 ==================================================
 
 ==================================================
 Running Greedy v2 algorithm...
 Description: Classic greedy TSP algorithm
-Parameters: start_point=0
-Completed in 0.0016 seconds
-Route length: 609.21
+Parameters: 
+Completed in 0.0015 seconds
+Route length: 1026.37
 ==================================================
 
-==============================================================================================================================
-                                                DETAILED ALGORITHM COMPARISON                                                 
-==============================================================================================================================
-Algorithm            | Time (s) |  vs Best  | Length | vs Best | Params                                                       
-------------------------------------------------------------------------------------------------------------------------------
-Greedy v2            | 0.0016 | BEST | 609.21 | +13.89% | start_point=0                                                
-Dynamic-gravity v2   | 0.0073 | +348.65%  | 534.90 | BEST | delta=0.5, fast_2opt_iter=1001                               
-Dynamic-gravity v1   | 0.0075 | +361.28%  | 567.00 | +6.00%  | delta=0.5, fast_2opt_iter=1001                               
-Angular-radial v2    | 0.0088 | +441.26%  | 553.66 | +3.51%  | sort_by=angle_distance, look_ahead=1000, max_2opt_iter=1001  
-Angular-radial v1    | 0.0842 | +5064.72% | 553.66 | +3.51%  | sort_by=angle_distance, look_ahead=1001, max_2opt_iter=1001  
-==============================================================================================================================
+=============================================================================================================================
+                                                DETAILED ALGORITHM COMPARISON                                                
+=============================================================================================================================
+Algorithm            | Time (s) |  vs Best  |  Length | vs Best | Params                                                     
+-----------------------------------------------------------------------------------------------------------------------------
+Greedy v2            | 0.0015 | BEST | 1026.37 | +20.66% |                                                            
+Dynamic-gravity v1   | 0.0071 | +367.32%  |  850.86 | +0.03%  | delta=0.5, fast_2opt_iter=100                              
+Dynamic-gravity v2   | 0.0071 | +367.38%  |  856.14 | +0.65%  | delta=0.5, fast_2opt_iter=100                              
+Angular-radial v2    | 0.0086 | +468.54%  | 850.62 | BEST | sort_by=angle_distance, look_ahead=100, max_2opt_iter=100  
+Angular-radial v1    | 0.0812 | +5243.04% | 850.62 | BEST | sort_by=angle_distance, look_ahead=100, max_2opt_iter=100  
+=============================================================================================================================
 
 PERFORMANCE ANALYSIS:
-- Fastest algorithm(s): Greedy v2 (0.0016 sec)
-- Shortest route(s): Dynamic-gravity v2 (534.90 units)
+- Fastest algorithm(s): Greedy v2 (0.0015 sec)
+- Shortest route(s): Angular-radial v1, Angular-radial v2 (850.62 units)
 ```
 
 ```
 ==================================================
           SMART TSP ALGORITHMS BENCHMARK          
 ==================================================
-Cities:         1001
-Seed:           0
-Generation:     cluster
+Dots:           1001
+Seed:           123
+Generation:     random
 Post-opt:       OFF
 Algorithms:    
-  - Angular-radial v1: sort_by=angle_distance, look_ahead=1001, max_2opt_iter=1001
-  - Angular-radial v2: sort_by=angle_distance, look_ahead=1000, max_2opt_iter=1001
-  - Dynamic-gravity v1: delta=0.5, fast_2opt_iter=1001
-  - Dynamic-gravity v2: delta=0.5, fast_2opt_iter=1001
-  - Greedy v2: start_point=0
+  - Angular-radial v1: 
+  - Angular-radial v2: 
+  - Dynamic-gravity v1: 
+  - Dynamic-gravity v2: 
+  - Greedy v2: 
 ==================================================
 
 
 ==================================================
 Running Angular-radial v1 algorithm...
 Description: Angular-radial v1
-Parameters: sort_by=angle_distance, look_ahead=1001, max_2opt_iter=1001
-Completed in 0.2531 seconds
-Route length: 1388.82
+Parameters: 
+Completed in 0.2555 seconds
+Route length: 2545.21
 ==================================================
 
 ==================================================
 Running Angular-radial v2 algorithm...
 Description: Angular-radial v2
-Parameters: sort_by=angle_distance, look_ahead=1000, max_2opt_iter=1001
-Completed in 0.1263 seconds
-Route length: 1388.82
+Parameters: 
+Completed in 0.1346 seconds
+Route length: 2545.21
 ==================================================
 
 ==================================================
 Running Dynamic-gravity v1 algorithm...
-Description: Dynamic gravity v1
-Parameters: delta=0.5, fast_2opt_iter=1001
-Completed in 0.0279 seconds
-Route length: 1486.12
+Description: Dynamic-gravity v1
+Parameters: 
+Completed in 0.0321 seconds
+Route length: 2837.78
 ==================================================
 
 ==================================================
 Running Dynamic-gravity v2 algorithm...
-Description: Dynamic gravity v2
-Parameters: delta=0.5, fast_2opt_iter=1001
-Completed in 0.0248 seconds
-Route length: 1485.03
+Description: Dynamic-gravity v2
+Parameters: 
+Completed in 0.0186 seconds
+Route length: 2726.36
 ==================================================
 
 ==================================================
 Running Greedy v2 algorithm...
 Description: Classic greedy TSP algorithm
-Parameters: start_point=0
-Completed in 0.0022 seconds
-Route length: 1612.74
+Parameters: 
+Completed in 0.0023 seconds
+Route length: 2985.82
 ==================================================
 
 ================================================================================================================================
@@ -431,23 +442,41 @@ Route length: 1612.74
 ================================================================================================================================
 Algorithm            | Time (s) |  vs Best   |  Length | vs Best | Params                                                       
 --------------------------------------------------------------------------------------------------------------------------------
-Greedy v2            | 0.0022 | BEST | 1612.74 | +16.12% | start_point=0                                                
-Dynamic-gravity v2   | 0.0248 | +1016.15%  | 1485.03 | +6.93%  | delta=0.5, fast_2opt_iter=1001                               
-Dynamic-gravity v1   | 0.0279 | +1156.99%  | 1486.12 | +7.01%  | delta=0.5, fast_2opt_iter=1001                               
-Angular-radial v2    | 0.1263 | +5590.97%  | 1388.82 | BEST | sort_by=angle_distance, look_ahead=1000, max_2opt_iter=1001  
-Angular-radial v1    | 0.2531 | +11304.79% | 1388.82 | BEST | sort_by=angle_distance, look_ahead=1001, max_2opt_iter=1001  
+Greedy v2            | 0.0023 | BEST | 2985.82 | +17.31% |                                                              
+Dynamic-gravity v2   | 0.0186 |  +695.63%  | 2726.36 | +7.12%  | delta=0.5, fast_2opt_iter=1001                               
+Dynamic-gravity v1   | 0.0321 | +1269.12%  | 2837.78 | +11.50% | delta=0.5, fast_2opt_iter=1001                               
+Angular-radial v2    | 0.1346 | +5646.96%  | 2545.21 | BEST | sort_by=angle_distance, look_ahead=1001, max_2opt_iter=1001  
+Angular-radial v1    | 0.2555 | +10808.60% | 2545.21 | BEST | sort_by=angle_distance, look_ahead=1001, max_2opt_iter=1001  
 ================================================================================================================================
 
 PERFORMANCE ANALYSIS:
-- Fastest algorithm(s): Greedy v2 (0.0022 sec)
-- Shortest route(s): Angular-radial v1, Angular-radial v2 (1388.82 units)
+- Fastest algorithm(s): Greedy v2 (0.0023 sec)
+- Shortest route(s): Angular-radial v1, Angular-radial v2 (2545.21 units)
 ```
 
 ---
 
-**Disclaimer:** Performance results shown are for clustered distributions. 
+**Disclaimer:** Performance results shown are for clustered/random distributions. 
 Results may vary based on spatial characteristics. 
 Always evaluate algorithms on your specific problem domains.
+
+---
+
+## 📜 Licensing
+
+This project uses a dual licensing system:
+
+### 🆓 BSD 3-Clause License
+- For non-commercial use
+- For academic and research purposes
+- For open-source projects
+
+### 💼 Commercial License
+- For commercial products and services
+- For enterprises using the code in proprietary solutions
+- For additional features and support
+
+**To obtain a commercial license:** [smartlegiondev@gmail.com](mailto:smartlegiondev@gmail.com)
 
 ---
 
