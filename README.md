@@ -290,22 +290,157 @@ For those interested in the theoretical foundations:
 - **Spatial Optimization:** Computational geometry approaches for large-scale problems
 - **Heuristic Analysis:** Comparative study of modern TSP approaches
 
-## 📚 Citation
-
-If this work contributes to your research, please cite:
-
-```bibtex
-@software{suvorov2025tspsolver,
-  title = {Smart TSP Solver Suite: Advanced Heuristic Algorithms},
-  author = {Suvorov, A.A.},
-  year = {2025},
-  url = {https://github.com/smartlegionlab/smart-tsp-solver}
-}
-```
-
 ---
 
 ## 📊 Sample Output
+
+```
+==================================================
+          SMART TSP ALGORITHMS BENCHMARK          
+==================================================
+Dots:           50
+Seed:           123
+Generation:     random
+Post-opt:       OFF
+Algorithms:    
+  - Angular-radial v1: 
+  - Angular-radial v2: 
+  - Dynamic-gravity v1: 
+  - Dynamic-gravity v2: 
+  - Greedy v2: 
+==================================================
+
+
+==================================================
+Running Angular-radial v1 algorithm...
+Description: Angular-radial v1
+Parameters: 
+Completed in 0.0798 seconds
+Route length: 658.16
+==================================================
+
+==================================================
+Running Angular-radial v2 algorithm...
+Description: Angular-radial v2
+Parameters: 
+Completed in 0.0082 seconds
+Route length: 658.16
+==================================================
+
+==================================================
+Running Dynamic-gravity v1 algorithm...
+Description: Dynamic-gravity v1
+Parameters: 
+Completed in 0.0067 seconds
+Route length: 582.13
+==================================================
+
+==================================================
+Running Dynamic-gravity v2 algorithm...
+Description: Dynamic-gravity v2
+Parameters: 
+Completed in 0.0065 seconds
+Route length: 577.06
+==================================================
+
+==================================================
+Running Greedy v2 algorithm...
+Description: Classic greedy TSP algorithm
+Parameters: 
+Completed in 0.0016 seconds
+Route length: 720.50
+==================================================
+
+============================================================================================================================
+                                               DETAILED ALGORITHM COMPARISON                                                
+============================================================================================================================
+Algorithm            | Time (s) |  vs Best  | Length | vs Best | Params                                                     
+----------------------------------------------------------------------------------------------------------------------------
+Greedy v2            | 0.0016 | BEST | 720.50 | +24.86% |                                                            
+Dynamic-gravity v2   | 0.0065 | +321.25%  | 577.06 | BEST | delta=0.5, fast_2opt_iter=100                              
+Dynamic-gravity v1   | 0.0067 | +328.66%  | 582.13 | +0.88%  | delta=0.5, fast_2opt_iter=100                              
+Angular-radial v2    | 0.0082 | +426.35%  | 658.16 | +14.05% | sort_by=angle_distance, look_ahead=100, max_2opt_iter=100  
+Angular-radial v1    | 0.0798 | +5035.05% | 658.16 | +14.05% | sort_by=angle_distance, look_ahead=100, max_2opt_iter=100  
+============================================================================================================================
+
+PERFORMANCE ANALYSIS:
+- Fastest algorithm(s): Greedy v2 (0.0016 sec)
+- Shortest route(s): Dynamic-gravity v2 (577.06 units)
+```
+
+```
+==================================================
+          SMART TSP ALGORITHMS BENCHMARK          
+==================================================
+Dots:           50
+Seed:           123
+Generation:     cluster
+Post-opt:       OFF
+Algorithms:    
+  - Angular-radial v1: 
+  - Angular-radial v2: 
+  - Dynamic-gravity v1: 
+  - Dynamic-gravity v2: 
+  - Greedy v2: 
+==================================================
+
+
+==================================================
+Running Angular-radial v1 algorithm...
+Description: Angular-radial v1
+Parameters: 
+Completed in 0.0798 seconds
+Route length: 519.29
+==================================================
+
+==================================================
+Running Angular-radial v2 algorithm...
+Description: Angular-radial v2
+Parameters: 
+Completed in 0.0081 seconds
+Route length: 519.29
+==================================================
+
+==================================================
+Running Dynamic-gravity v1 algorithm...
+Description: Dynamic-gravity v1
+Parameters: 
+Completed in 0.0066 seconds
+Route length: 495.87
+==================================================
+
+==================================================
+Running Dynamic-gravity v2 algorithm...
+Description: Dynamic-gravity v2
+Parameters: 
+Completed in 0.0066 seconds
+Route length: 495.87
+==================================================
+
+==================================================
+Running Greedy v2 algorithm...
+Description: Classic greedy TSP algorithm
+Parameters: 
+Completed in 0.0015 seconds
+Route length: 621.53
+==================================================
+
+============================================================================================================================
+                                               DETAILED ALGORITHM COMPARISON                                                
+============================================================================================================================
+Algorithm            | Time (s) |  vs Best  | Length | vs Best | Params                                                     
+----------------------------------------------------------------------------------------------------------------------------
+Greedy v2            | 0.0015 | BEST | 621.53 | +25.34% |                                                            
+Dynamic-gravity v2   | 0.0066 | +331.67%  | 495.87 | BEST | delta=0.5, fast_2opt_iter=100                              
+Dynamic-gravity v1   | 0.0066 | +333.80%  | 495.87 | BEST | delta=0.5, fast_2opt_iter=100                              
+Angular-radial v2    | 0.0081 | +431.08%  | 519.29 | +4.72%  | sort_by=angle_distance, look_ahead=100, max_2opt_iter=100  
+Angular-radial v1    | 0.0798 | +5150.37% | 519.29 | +4.72%  | sort_by=angle_distance, look_ahead=100, max_2opt_iter=100  
+============================================================================================================================
+
+PERFORMANCE ANALYSIS:
+- Fastest algorithm(s): Greedy v2 (0.0015 sec)
+- Shortest route(s): Dynamic-gravity v1, Dynamic-gravity v2 (495.87 units)
+```
 
 ```
 ==================================================
