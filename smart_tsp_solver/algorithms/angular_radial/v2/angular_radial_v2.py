@@ -1,6 +1,4 @@
-# -----------------------------------------------------------
 # Copyright (©) 2025, Alexander Suvorov. All rights reserved.
-# -----------------------------------------------------------
 import numpy as np
 from numba import njit
 from typing import List, Optional, Union
