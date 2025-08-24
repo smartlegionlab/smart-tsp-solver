@@ -187,7 +187,7 @@ if __name__ == '__main__':
 ```
 
 
-## 🚀 Usage
+### 🚀 Example
 
 ```bash
 git clone https://github.com/smartlegionlab/smart-tsp-solver.git
@@ -198,6 +198,12 @@ pip install -r requirements.txt
 python main.py
 ```
 
+### Testing with different settings
+
+- change basic settings
+- add algorithms for comparison
+
+`python test.py`
 
 ## 📊 Comprehensive Performance Analysis
 
