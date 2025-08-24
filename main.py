@@ -13,7 +13,7 @@ from smart_tsp_solver.algorithms.other.greedy.v2.greedy_v2 import greedy_tsp_v2
 
 def main():
     config = {
-        'n_dots': 1001,
+        'n_dots': 100,
         'seed': 123,
         'dot_generation': 'random',
         'use_post_optimization': False,
@@ -27,8 +27,8 @@ def main():
             function=angular_radial_tsp_v1,
             params={
                 "sort_by": "angle_distance",
-                "look_ahead": 1001,
-                "max_2opt_iter": 1001
+                "look_ahead": 100,
+                "max_2opt_iter": 100
             },
             post_optimize=True,
             description="Angular-radial v1",
@@ -41,8 +41,8 @@ def main():
             function=angular_radial_tsp_v2,
             params={
                 "sort_by": "angle_distance",
-                "look_ahead": 1001,
-                "max_2opt_iter": 1001
+                "look_ahead": 100,
+                "max_2opt_iter": 100
             },
             post_optimize=True,
             description="Angular-radial v2",
@@ -55,7 +55,7 @@ def main():
             function=dynamic_gravity_tsp_v1,
             params={
                 "delta": 0.5,
-                "fast_2opt_iter": 1001
+                "fast_2opt_iter": 100
             },
             post_optimize=True,
             description="Dynamic-gravity v1",
@@ -68,7 +68,7 @@ def main():
             function=dynamic_gravity_tsp_v2,
             params={
                 "delta": 0.5,
-                "fast_2opt_iter": 1001
+                "fast_2opt_iter": 100
             },
             post_optimize=True,
             description="Dynamic-gravity v2",
