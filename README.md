@@ -1,4 +1,4 @@
-# Smart TSP Solver <sup>v0.1.3</sup>
+# Smart TSP Solver <sup>v0.1.4</sup>
 
 ---
 
@@ -274,11 +274,6 @@ Our comprehensive benchmarking reveals a clear performance-quality tradeoff acro
 - This project represents extensive research into spatial optimization techniques
 
 *Explore other projects on [GitHub](https://github.com/smartlegionlab).*
-
-## 📄 License
-
-This project is licensed under the **BSD 3-Clause License** - see the [LICENSE](LICENSE) file for details. 
-This permits academic and commercial use while protecting author rights.
 
 ## 🔗 Related Research
 

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "smart-tsp-solver"
-version = "0.1.3"
+version = "0.1.4"
 description = "A high-performance Python library for solving the Traveling Salesman Problem (TSP) using novel heuristic approaches. Features advanced algorithms that outperform classical methods by 6-16% on real-world clustered data while maintaining practical computational efficiency."
 authors = [
     {name = "A.A Suvorov", email = "smartlegiondev@gmail.com"}

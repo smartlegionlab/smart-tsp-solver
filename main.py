@@ -1,7 +1,6 @@
-# --------------------------------------------------------
-# Copyright © 2025, A.A. Suvorov
-# All rights reserved.
-# --------------------------------------------------------
+# -----------------------------------------------------------
+# Copyright (©) 2025, Alexander Suvorov. All rights reserved.
+# -----------------------------------------------------------
 from smart_tsp_benchmark.tsp_benchmark import TSPBenchmark, AlgorithmConfig
 
 from smart_tsp_solver.algorithms.angular_radial.v1.angular_radial_v1 import angular_radial_tsp_v1
