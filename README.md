@@ -1,4 +1,4 @@
-# Smart TSP Solver <sup>v0.1.4</sup>
+# Smart TSP Solver <sup>v0.1.5</sup>
 
 ---
 
@@ -267,7 +267,7 @@ Our comprehensive benchmarking reveals a clear performance-quality tradeoff acro
 
 ## 👨‍💻 Author
 
-**A.A. Suvorov**
+**Alexander Suvorov**
 
 - Researcher specializing in computational optimization and high-performance algorithms
 - Focused on bridging theoretical computer science with practical engineering applications

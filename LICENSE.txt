@@ -1,6 +1,6 @@
 DUAL LICENSING AGREEMENT
 
-Preamble This software("the Software") is offered under a dual-licensing model by A.A. Suvorov ("the Licensor"). You must choose between the terms of the NON-COMMERCIAL LICENSE (Option 1) or obtain a COMMERCIAL LICENSE (Option 2). By downloading, copying, installing, or otherwise using the Software, you are agreeing to be bound by the terms of the Non-Commercial License unless you have a separate, signed commercial license agreement with the Licensor.
+Preamble This software("the Software") is offered under a dual-licensing model by Alexander Suvorov ("the Licensor"). You must choose between the terms of the NON-COMMERCIAL LICENSE (Option 1) or obtain a COMMERCIAL LICENSE (Option 2). By downloading, copying, installing, or otherwise using the Software, you are agreeing to be bound by the terms of the Non-Commercial License unless you have a separate, signed commercial license agreement with the Licensor.
 
 OPTION 1: NON-COMMERCIAL LICENSE (BSD 3-Clause Variant)
 
