@@ -1,4 +1,4 @@
-# Smart TSP Solver Suite (Smart TSP Heuristics)
+# Smart TSP Solver
 
 ---
 
@@ -8,12 +8,12 @@ clustered data while maintaining practical computational efficiency.
 
 ---
 
-![GitHub top language](https://img.shields.io/github/languages/top/smartlegionlab/smart-tsp-heuristics)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/smartlegionlab/smart-tsp-heuristics)](https://github.com/smartlegionlab/smart-tsp-heuristics/)
-[![GitHub](https://img.shields.io/github/license/smartlegionlab/smart-tsp-heuristics)](https://github.com/smartlegionlab/smart-tsp-heuristics/blob/master/LICENSE)
-[![GitHub Repo stars](https://img.shields.io/github/stars/smartlegionlab/smart-tsp-heuristics?style=social)](https://github.com/smartlegionlab/smart-tsp-heuristics/)
-[![GitHub watchers](https://img.shields.io/github/watchers/smartlegionlab/smart-tsp-heuristics?style=social)](https://github.com/smartlegionlab/smart-tsp-heuristics/)
-[![GitHub forks](https://img.shields.io/github/forks/smartlegionlab/smart-tsp-heuristics?style=social)](https://github.com/smartlegionlab/smart-tsp-heuristics/)
+![GitHub top language](https://img.shields.io/github/languages/top/smartlegionlab/smart-tsp-solver)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/smartlegionlab/smart-tsp-solver)](https://github.com/smartlegionlab/smart-tsp-solver/)
+[![GitHub](https://img.shields.io/github/license/smartlegionlab/smart-tsp-solver)](https://github.com/smartlegionlab/smart-tsp-solver/blob/master/LICENSE)
+[![GitHub Repo stars](https://img.shields.io/github/stars/smartlegionlab/smart-tsp-solver?style=social)](https://github.com/smartlegionlab/smart-tsp-solver/)
+[![GitHub watchers](https://img.shields.io/github/watchers/smartlegionlab/smart-tsp-solver?style=social)](https://github.com/smartlegionlab/smart-tsp-solver/)
+[![GitHub forks](https://img.shields.io/github/forks/smartlegionlab/smart-tsp-solver?style=social)](https://github.com/smartlegionlab/smart-tsp-solver/)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/smart-tsp-solver?label=pypi%20downloads)](https://pypi.org/project/smart-tsp-solver/)
 [![PyPI](https://img.shields.io/pypi/v/smart-tsp-solver)](https://pypi.org/project/smart-tsp-solver)
 [![PyPI - Format](https://img.shields.io/pypi/format/smart-tsp-solver)](https://pypi.org/project/smart-tsp-solver)
@@ -49,7 +49,7 @@ All algorithms are compared against a **highly optimized greedy implementation**
 
 This ensures fair comparison against a professionally implemented baseline rather than naive reference implementations.
 
-## 📦 Installation and Run
+## 📦 Installation
 
 ### Install
 
@@ -57,32 +57,9 @@ This ensures fair comparison against a professionally implemented baseline rathe
 pip install smart-tsp-solver
 ```
 
+### Usage example
 
-### Parameter Guidance
-
-**Dynamic-gravity:**
-```python
-# Balanced configuration
-route = dynamic_gravity_tsp_v2(cities, delta=0.5, fast_2opt_iter=100)
-```
-
-**Angular-radial:**
-```python
-# Standard configuration
-route = angular_radial_tsp_v2(cities, look_ahead=1000, max_2opt_iter=100)
-```
-
-### Run:
-
-```bash
-git clone https://github.com/smartlegionlab/smart-tsp-heuristics.git
-cd smart-tsp-heuristics
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-```
-
-Create configuration file tsp_config.json:
+Example of creating a configuration file `tsp_config.json`:
 
 ```json
 {
@@ -125,7 +102,7 @@ Create configuration file tsp_config.json:
   },
   "benchmark": {
     "n_cities": 100,
-    "seed": 777,
+    "seed": 123,
     "city_generation": "cluster",
     "use_post_optimization": false,
     "plot_results": false,
@@ -134,9 +111,70 @@ Create configuration file tsp_config.json:
 }
 ```
 
-- `python main.py`
+### Launch using [Smart TSP Benchmark](https://github.com/smartlegionlab/smart-tsp-benchmark) 
+
+```python
+from smart_tsp_benchmark.tsp_benchmark import TSPBenchmark, AlgorithmConfig
+
+from smart_tsp_solver.algorithms.angular_radial.v1.angular_radial_v1 import angular_radial_tsp_v1
+from smart_tsp_solver.algorithms.angular_radial.v2.angular_radial_v2 import angular_radial_tsp_v2
+from smart_tsp_solver.algorithms.dynamic_gravity.v1.dynamic_gravity_v1 import dynamic_gravity_tsp_v1
+from smart_tsp_solver.algorithms.dynamic_gravity.v2.dynamic_gravity_v2 import dynamic_gravity_tsp_v2
+from smart_tsp_solver.algorithms.other.greedy.v2.greedy_v2 import greedy_tsp_v2
+
+
+def main():
+    algorithms = {
+        'Angular-radial v1': AlgorithmConfig(
+            function=angular_radial_tsp_v1,
+            params={},
+            post_optimize=True,
+            description="Angular-radial v1",
+            is_class=False
+        ),
+        'Angular-radial v2': AlgorithmConfig(
+            function=angular_radial_tsp_v2,
+            params={},
+            post_optimize=True,
+            description="Angular-radial v2",
+            is_class=False
+        ),
+        'Dynamic-gravity v1': AlgorithmConfig(
+            function=dynamic_gravity_tsp_v1,
+            params={},
+            post_optimize=True,
+            description="Dynamic gravity v1",
+            is_class=False,
+        ),
+        'Dynamic-gravity v2': AlgorithmConfig(
+            function=dynamic_gravity_tsp_v2,
+            params={},
+            post_optimize=True,
+            description="Dynamic gravity v2",
+            is_class=False,
+        ),
+        'Greedy v2': AlgorithmConfig(
+            function=greedy_tsp_v2,
+            params={},
+            post_optimize=False,
+            description="Classic greedy TSP algorithm",
+            is_class=False,
+        ),
+    }
+    benchmark = TSPBenchmark(config_path='tsp_config.json')
+    benchmark.algorithms = algorithms
+    benchmark.run_benchmark()
+
+
+if __name__ == '__main__':
+    main()
+
+```
+
 
 ## 📊 Comprehensive Performance Analysis
+
+Use [Smart TSP Benchmark](https://github.com/smartlegionlab/smart-tsp-benchmark) 
 
 ### Experimental Results
 
@@ -178,8 +216,8 @@ Our benchmarking reveals sophisticated performance characteristics across differ
 
 ## 🎨 Advanced Visualization
 
-![LOGO](https://github.com/smartlegionlab/smart-tsp-heuristics/raw/master/data/images/tsp100.png)
-![LOGO](https://github.com/smartlegionlab/smart-tsp-heuristics/raw/master/data/images/tsp1001.png)
+![LOGO](https://github.com/smartlegionlab/smart-tsp-solver/raw/master/data/images/tsp100.png)
+![LOGO](https://github.com/smartlegionlab/smart-tsp-solver/raw/master/data/images/tsp1001.png)
 *Visual analysis showing Angular-radial's optimal sector-based routing, Dynamic-gravity's smooth trajectories, Greedy's suboptimal clustering*
 
 ## 🏗️ Architecture & Implementation
@@ -226,6 +264,7 @@ This permits academic and commercial use while protecting author rights.
 For those interested in the theoretical foundations:
 
 - **Exact TSP Solutions (TSP ORACLE):** [exact-tsp-solver](https://github.com/smartlegionlab/exact-tsp-solver) - Optimal solutions for small instances
+- **Smart TSP Benchmark** - [Smart TSP Benchmark](https://github.com/smartlegionlab/smart-tsp-benchmark)  is a professional algorithm testing infrastructure with customizable scenarios and detailed metrics.
 - **Spatial Optimization:** Computational geometry approaches for large-scale problems
 - **Heuristic Analysis:** Comparative study of modern TSP approaches
 
@@ -238,7 +277,7 @@ If this work contributes to your research, please cite:
   title = {Smart TSP Solver Suite: Advanced Heuristic Algorithms},
   author = {Suvorov, A.A.},
   year = {2025},
-  url = {https://github.com/smartlegionlab/smart-tsp-heuristics}
+  url = {https://github.com/smartlegionlab/smart-tsp-solver}
 }
 ```
 
