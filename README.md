@@ -1,4 +1,4 @@
-# Smart TSP Solver <sup>v0.1.6</sup>
+# Smart TSP Solver <sup>v0.1.7</sup>
 
 ---
 
@@ -39,6 +39,8 @@ clustered data while maintaining practical computational efficiency.
 
 Library implements two advanced heuristic approaches, each tackling the classic speed-quality trade-off in a unique way.
 
+---
+
 ### 🧲 Dynamic Gravity Approach
 
 **Complexity:** `O(n²)`
@@ -49,6 +51,8 @@ Library implements two advanced heuristic approaches, each tackling the classic 
 | :--- | :--- |
 | • Predictable execution time<br>• Consistently high solution quality<br>• Efficient cluster traversal | The balance of speed and quality, processing medium-sized datasets |
 
+---
+
 ### 📐 Angular-Radial Method
 
 **Complexity:** `O(n²)` *with near O(n·log n) practical performance*
@@ -58,6 +62,26 @@ Library implements two advanced heuristic approaches, each tackling the classic 
 | Strengths | Ideal Use Case |
 | :--- | :--- |
 | • Best-in-class final route quality<br>• Near-linear practical performance<br>• Exceptional efficiency on clustered data | Offline calculations where route length is critical and tasks require scaling |
+
+---
+
+### Hierarchical TSP Solver
+
+A traveling salesman problem (TSP) solver using hierarchical decomposition and metaheuristics.
+
+## 🧠 Algorithm Overview
+
+### Core Philosophy: Divide-and-Conquer with Geometric Intelligence
+
+The solver employs a multi-level hierarchical approach that mirrors 
+human problem-solving strategies for large-scale routing:
+
+1. **Spatial Decomposition**: Recursively partition the problem into manageable clusters
+2. **Local Optimization**: Solve subproblems optimally within each cluster
+3. **Global Integration**: Intelligently combine local solutions into a global route
+4. **Refinement**: Apply local search to polish the final solution
+
+---
 
 ### Performance Comparison
 
@@ -306,6 +330,32 @@ For those interested in the theoretical foundations:
 - **Smart TSP Benchmark** - [Smart TSP Benchmark](https://github.com/smartlegionlab/smart-tsp-benchmark)  is a professional algorithm testing infrastructure with customizable scenarios and detailed metrics.
 - **Spatial Optimization:** Computational geometry approaches for large-scale problems
 - **Heuristic Analysis:** Comparative study of modern TSP approaches
+
+
+---
+
+## 📜 Licensing
+
+This project is offered under a dual-licensing model.
+
+### 🆓 Option 1: BSD 3-Clause License (for Non-Commercial Use)
+This license is **free of charge** and allows you to use the software for:
+- Personal and educational purposes
+- Academic research and open-source projects
+- Evaluation and testing
+
+**Important:** Any use by a commercial organization or for commercial purposes (including internal development and prototyping) requires a commercial license.
+
+### 💼 Option 2: Commercial License (for Commercial Use)
+A commercial license is **required** for:
+- Integrating this software into proprietary products
+- Using it in internal operations within a company
+- SaaS and hosted services that incorporate this software
+
+**Important:** The commercial license provides usage rights but **does not include any indemnification or liability**. The software is provided "AS IS" without any warranties as described in the full license agreement.
+
+**To obtain a commercial license,** please contact us directly at:  
+📧 **smartlegiondev@gmail.com**
 
 ---
 
@@ -698,28 +748,3 @@ PERFORMANCE ANALYSIS:
 **Disclaimer:** Performance results shown are for clustered/random distributions. 
 Results may vary based on spatial characteristics. 
 Always evaluate algorithms on your specific problem domains.
-
----
-
-## 📜 Licensing
-
-This project is offered under a dual-licensing model.
-
-### 🆓 Option 1: BSD 3-Clause License (for Non-Commercial Use)
-This license is **free of charge** and allows you to use the software for:
-- Personal and educational purposes
-- Academic research and open-source projects
-- Evaluation and testing
-
-**Important:** Any use by a commercial organization or for commercial purposes (including internal development and prototyping) requires a commercial license.
-
-### 💼 Option 2: Commercial License (for Commercial Use)
-A commercial license is **required** for:
-- Integrating this software into proprietary products
-- Using it in internal operations within a company
-- SaaS and hosted services that incorporate this software
-
-**Important:** The commercial license provides usage rights but **does not include any indemnification or liability**. The software is provided "AS IS" without any warranties as described in the full license agreement.
-
-**To obtain a commercial license,** please contact us directly at:  
-📧 **smartlegiondev@gmail.com**
