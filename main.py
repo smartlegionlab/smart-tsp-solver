@@ -1,11 +1,12 @@
 # Copyright (©) 2025, Alexander Suvorov. All rights reserved.
 from smart_tsp_benchmark.tsp_benchmark import TSPBenchmark, AlgorithmConfig
 
-from smart_tsp_solver.algorithms.angular_radial.v1.angular_radial_v1 import angular_radial_tsp_v1
-from smart_tsp_solver.algorithms.angular_radial.v2.angular_radial_v2 import angular_radial_tsp_v2
-from smart_tsp_solver.algorithms.dynamic_gravity.v1.dynamic_gravity_v1 import dynamic_gravity_tsp_v1
-from smart_tsp_solver.algorithms.dynamic_gravity.v2.dynamic_gravity_v2 import dynamic_gravity_tsp_v2
-from smart_tsp_solver.algorithms.other.greedy.v2.greedy_v2 import greedy_tsp_v2
+from smart_tsp_solver import hierarchical_tsp_solver_v2
+from smart_tsp_solver.algorithms.angular_radial.v1 import angular_radial_tsp_v1
+from smart_tsp_solver.algorithms.angular_radial.v2 import angular_radial_tsp_v2
+from smart_tsp_solver.algorithms.dynamic_gravity.v1 import dynamic_gravity_tsp_v1
+from smart_tsp_solver.algorithms.dynamic_gravity.v2 import dynamic_gravity_tsp_v2
+from smart_tsp_solver.algorithms.other.greedy.v2 import greedy_tsp_v2
 
 
 def main():
@@ -80,6 +81,19 @@ def main():
             post_optimize=False,
             description="Classic greedy TSP algorithm",
             is_class=False,
+        )
+    )
+    benchmark.add_algorithm(
+        name='Hierarchical TSP',
+        config=AlgorithmConfig(
+            function=hierarchical_tsp_solver_v2,
+            params={
+                "cluster_size": 100,
+                "post_optimize": True
+            },
+            post_optimize=False,
+            description="Hierarchical clustering TSP solver",
+            is_class=False
         )
     )
     benchmark.run_benchmark()

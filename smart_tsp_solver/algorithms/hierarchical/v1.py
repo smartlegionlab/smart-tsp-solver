@@ -175,7 +175,7 @@ def solve_tsp(cities: Union[np.ndarray, List[List[float]]]) -> List[int]:
     return hierarchical_tsp(cities, cluster_size=100, post_optimize=True)
 
 
-def hierarchical_tsp_solver(cities: np.ndarray, **kwargs) -> List[int]:
+def hierarchical_tsp_solver_v1(cities: np.ndarray, **kwargs) -> List[int]:
     cluster_size = kwargs.get('cluster_size', 100)
     post_optimize = kwargs.get('post_optimize', True)
     return hierarchical_tsp(cities, cluster_size, post_optimize)

@@ -94,19 +94,22 @@ pip install smart-tsp-solver
 
 ### Launch using [Smart TSP Benchmark](https://github.com/smartlegionlab/smart-tsp-benchmark)
 
+`pip install smart-tsp-benchmark`
+
 ```python
 from smart_tsp_benchmark.tsp_benchmark import TSPBenchmark, AlgorithmConfig
 
-from smart_tsp_solver.algorithms.angular_radial.v1.angular_radial_v1 import angular_radial_tsp_v1
-from smart_tsp_solver.algorithms.angular_radial.v2.angular_radial_v2 import angular_radial_tsp_v2
-from smart_tsp_solver.algorithms.dynamic_gravity.v1.dynamic_gravity_v1 import dynamic_gravity_tsp_v1
-from smart_tsp_solver.algorithms.dynamic_gravity.v2.dynamic_gravity_v2 import dynamic_gravity_tsp_v2
-from smart_tsp_solver.algorithms.other.greedy.v2.greedy_v2 import greedy_tsp_v2
+from smart_tsp_solver import hierarchical_tsp_solver_v2
+from smart_tsp_solver.algorithms.angular_radial.v1 import angular_radial_tsp_v1
+from smart_tsp_solver.algorithms.angular_radial.v2 import angular_radial_tsp_v2
+from smart_tsp_solver.algorithms.dynamic_gravity.v1 import dynamic_gravity_tsp_v1
+from smart_tsp_solver.algorithms.dynamic_gravity.v2 import dynamic_gravity_tsp_v2
+from smart_tsp_solver.algorithms.other.greedy.v2 import greedy_tsp_v2
 
 
 def main():
     config = {
-        'n_dots': 1001,
+        'n_dots': 100,
         'seed': 123,
         'dot_generation': 'random',
         'use_post_optimization': False,
@@ -120,8 +123,8 @@ def main():
             function=angular_radial_tsp_v1,
             params={
                 "sort_by": "angle_distance",
-                "look_ahead": 1001,
-                "max_2opt_iter": 1001
+                "look_ahead": 100,
+                "max_2opt_iter": 100
             },
             post_optimize=True,
             description="Angular-radial v1",
@@ -134,8 +137,8 @@ def main():
             function=angular_radial_tsp_v2,
             params={
                 "sort_by": "angle_distance",
-                "look_ahead": 1001,
-                "max_2opt_iter": 1001
+                "look_ahead": 100,
+                "max_2opt_iter": 100
             },
             post_optimize=True,
             description="Angular-radial v2",
@@ -148,7 +151,7 @@ def main():
             function=dynamic_gravity_tsp_v1,
             params={
                 "delta": 0.5,
-                "fast_2opt_iter": 1001
+                "fast_2opt_iter": 100
             },
             post_optimize=True,
             description="Dynamic-gravity v1",
@@ -161,7 +164,7 @@ def main():
             function=dynamic_gravity_tsp_v2,
             params={
                 "delta": 0.5,
-                "fast_2opt_iter": 1001
+                "fast_2opt_iter": 100
             },
             post_optimize=True,
             description="Dynamic-gravity v2",
@@ -176,6 +179,19 @@ def main():
             post_optimize=False,
             description="Classic greedy TSP algorithm",
             is_class=False,
+        )
+    )
+    benchmark.add_algorithm(
+        name='Hierarchical TSP',
+        config=AlgorithmConfig(
+            function=hierarchical_tsp_solver_v2,
+            params={
+                "cluster_size": 100,
+                "post_optimize": True
+            },
+            post_optimize=False,
+            description="Hierarchical clustering TSP solver",
+            is_class=False
         )
     )
     benchmark.run_benchmark()
@@ -258,6 +274,7 @@ Our comprehensive benchmarking reveals a clear performance-quality tradeoff acro
 
 ![LOGO](https://github.com/smartlegionlab/smart-tsp-solver/raw/master/data/images/tsp100.png)
 ![LOGO](https://github.com/smartlegionlab/smart-tsp-solver/raw/master/data/images/tsp1001.png)
+![LOGO](https://github.com/smartlegionlab/smart-tsp-solver/raw/master/data/images/tsp_25_08_25.png)
 *Visual analysis showing Angular-radial's optimal sector-based routing, Dynamic-gravity's smooth trajectories, Greedy's suboptimal clustering*
 
 ## 🏗️ Architecture & Implementation
@@ -293,6 +310,92 @@ For those interested in the theoretical foundations:
 ---
 
 ## 📊 Sample Output
+
+```
+==================================================
+          SMART TSP ALGORITHMS BENCHMARK          
+==================================================
+Dots:           100
+Seed:           123
+Generation:     random
+Post-opt:       OFF
+Algorithms:    
+  - Angular-radial v1: 
+  - Angular-radial v2: 
+  - Dynamic-gravity v1: 
+  - Dynamic-gravity v2: 
+  - Greedy v2: 
+  - Hierarchical TSP: 
+==================================================
+
+
+==================================================
+Running Angular-radial v1 algorithm...
+Description: Angular-radial v1
+Parameters: 
+Completed in 2.5245 seconds
+Route length: 850.62
+==================================================
+
+==================================================
+Running Angular-radial v2 algorithm...
+Description: Angular-radial v2
+Parameters: 
+Completed in 0.6046 seconds
+Route length: 850.62
+==================================================
+
+==================================================
+Running Dynamic-gravity v1 algorithm...
+Description: Dynamic-gravity v1
+Parameters: 
+Completed in 0.5134 seconds
+Route length: 850.86
+==================================================
+
+==================================================
+Running Dynamic-gravity v2 algorithm...
+Description: Dynamic-gravity v2
+Parameters: 
+Completed in 0.5180 seconds
+Route length: 856.14
+==================================================
+
+==================================================
+Running Greedy v2 algorithm...
+Description: Classic greedy TSP algorithm
+Parameters: 
+Completed in 0.1141 seconds
+Route length: 1026.37
+==================================================
+
+==================================================
+Running Hierarchical TSP algorithm...
+Description: Hierarchical clustering TSP solver
+Parameters: 
+Completed in 0.0273 seconds
+Route length: 822.31
+==================================================
+
+=============================================================================================================================
+                                                DETAILED ALGORITHM COMPARISON                                                
+=============================================================================================================================
+Algorithm            | Time (s) |  vs Best  |  Length | vs Best | Params                                                     
+-----------------------------------------------------------------------------------------------------------------------------
+Hierarchical TSP     | 0.0273 | BEST | 822.31 | BEST | cluster_size=100, post_optimize=True                       
+Greedy v2            | 0.1141 | +318.52%  | 1026.37 | +24.81% |                                                            
+Dynamic-gravity v1   | 0.5134 | +1782.85% |  850.86 | +3.47%  | delta=0.5, fast_2opt_iter=100                              
+Dynamic-gravity v2   | 0.5180 | +1799.68% |  856.14 | +4.11%  | delta=0.5, fast_2opt_iter=100                              
+Angular-radial v2    | 0.6046 | +2117.44% |  850.62 | +3.44%  | sort_by=angle_distance, look_ahead=100, max_2opt_iter=100  
+Angular-radial v1    | 2.5245 | +9158.34% |  850.62 | +3.44%  | sort_by=angle_distance, look_ahead=100, max_2opt_iter=100  
+=============================================================================================================================
+
+PERFORMANCE ANALYSIS:
+- Fastest algorithm(s): Hierarchical TSP (0.0273 sec)
+- Shortest route(s): Hierarchical TSP (822.31 units)
+
+⭐️ BEST BALANCED: Hierarchical TSP (fastest and shortest)
+```
 
 ```
 ==================================================
@@ -597,13 +700,6 @@ Results may vary based on spatial characteristics.
 Always evaluate algorithms on your specific problem domains.
 
 ---
-
-## 👨‍💻 Author
-
-[**A.A. Suvorov**](https://github.com/smartlegionlab/)
-
-*   Passionate about pushing the boundaries of algorithmic optimization.
-*   This solver was developed to bridge the gap between theoretical computer science and practical implementation.
 
 ## 📜 Licensing
 
