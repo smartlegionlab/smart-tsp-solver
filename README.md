@@ -1,4 +1,4 @@
-# Smart TSP Solver <sup>v0.1.7</sup>
+# Smart TSP Solver <sup>v0.1.8</sup>
 
 ---
 
@@ -367,7 +367,7 @@ A commercial license is **required** for:
 ==================================================
 Dots:           100
 Seed:           123
-Generation:     random
+Generation:     cluster
 Post-opt:       OFF
 Algorithms:    
   - Angular-radial v1: 
@@ -382,69 +382,61 @@ Algorithms:
 ==================================================
 Running Angular-radial v1 algorithm...
 Description: Angular-radial v1
-Parameters: 
-Completed in 2.5245 seconds
-Route length: 850.62
+Completed in 0.0848 seconds
+Route length: 553.66
 ==================================================
 
 ==================================================
 Running Angular-radial v2 algorithm...
 Description: Angular-radial v2
-Parameters: 
-Completed in 0.6046 seconds
-Route length: 850.62
+Completed in 0.0082 seconds
+Route length: 553.66
 ==================================================
 
 ==================================================
 Running Dynamic-gravity v1 algorithm...
 Description: Dynamic-gravity v1
-Parameters: 
-Completed in 0.5134 seconds
-Route length: 850.86
+Completed in 0.0070 seconds
+Route length: 567.00
 ==================================================
 
 ==================================================
 Running Dynamic-gravity v2 algorithm...
 Description: Dynamic-gravity v2
-Parameters: 
-Completed in 0.5180 seconds
-Route length: 856.14
+Completed in 0.0067 seconds
+Route length: 534.90
 ==================================================
 
 ==================================================
 Running Greedy v2 algorithm...
 Description: Classic greedy TSP algorithm
-Parameters: 
-Completed in 0.1141 seconds
-Route length: 1026.37
+Completed in 0.0016 seconds
+Route length: 609.21
 ==================================================
 
 ==================================================
 Running Hierarchical TSP algorithm...
 Description: Hierarchical clustering TSP solver
-Parameters: 
-Completed in 0.0273 seconds
-Route length: 822.31
+Completed in 0.0343 seconds
+Route length: 524.25
 ==================================================
 
-=============================================================================================================================
-                                                DETAILED ALGORITHM COMPARISON                                                
-=============================================================================================================================
-Algorithm            | Time (s) |  vs Best  |  Length | vs Best | Params                                                     
------------------------------------------------------------------------------------------------------------------------------
-Hierarchical TSP     | 0.0273 | BEST | 822.31 | BEST | cluster_size=100, post_optimize=True                       
-Greedy v2            | 0.1141 | +318.52%  | 1026.37 | +24.81% |                                                            
-Dynamic-gravity v1   | 0.5134 | +1782.85% |  850.86 | +3.47%  | delta=0.5, fast_2opt_iter=100                              
-Dynamic-gravity v2   | 0.5180 | +1799.68% |  856.14 | +4.11%  | delta=0.5, fast_2opt_iter=100                              
-Angular-radial v2    | 0.6046 | +2117.44% |  850.62 | +3.44%  | sort_by=angle_distance, look_ahead=100, max_2opt_iter=100  
-Angular-radial v1    | 2.5245 | +9158.34% |  850.62 | +3.44%  | sort_by=angle_distance, look_ahead=100, max_2opt_iter=100  
-=============================================================================================================================
+============================================================================================================================
+                                               DETAILED ALGORITHM COMPARISON                                                
+============================================================================================================================
+Algorithm            | Time (s) |  vs Best  | Length | vs Best | Params                                                     
+----------------------------------------------------------------------------------------------------------------------------
+Greedy v2            | 0.0016 | BEST | 609.21 | +16.21% |                                                            
+Dynamic-gravity v2   | 0.0067 | +332.71%  | 534.90 | +2.03%  | delta=0.5, fast_2opt_iter=100                              
+Dynamic-gravity v1   | 0.0070 | +349.52%  | 567.00 | +8.15%  | delta=0.5, fast_2opt_iter=100                              
+Angular-radial v2    | 0.0082 | +430.93%  | 553.66 | +5.61%  | sort_by=angle_distance, look_ahead=100, max_2opt_iter=100  
+Hierarchical TSP     | 0.0343 | +2110.90% | 524.25 | BEST | cluster_size=100, post_optimize=True                       
+Angular-radial v1    | 0.0848 | +5361.28% | 553.66 | +5.61%  | sort_by=angle_distance, look_ahead=100, max_2opt_iter=100  
+============================================================================================================================
 
 PERFORMANCE ANALYSIS:
-- Fastest algorithm(s): Hierarchical TSP (0.0273 sec)
-- Shortest route(s): Hierarchical TSP (822.31 units)
-
-⭐️ BEST BALANCED: Hierarchical TSP (fastest and shortest)
+- Fastest algorithm(s): Greedy v2 (0.0016 sec)
+- Shortest route(s): Hierarchical TSP (524.25 units)
 ```
 
 ```

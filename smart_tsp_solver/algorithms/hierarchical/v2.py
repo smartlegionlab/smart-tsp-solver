@@ -124,7 +124,7 @@ def hierarchical_tsp_optimized(
         route = _greedy_tsp_simple(cities, dist_matrix)
         if post_optimize:
             route = _fast_2opt(route, dist_matrix, min(100, n * 2))
-        return route[:-1].tolist()
+        return route.tolist()
 
     k = max(2, n // cluster_size)
     labels, centroids = _simple_kmeans(cities, k)
@@ -156,7 +156,10 @@ def hierarchical_tsp_optimized(
         final_route_np = np.array(final_route, dtype=int)
         dist_matrix = _compute_dist_matrix_fast(cities)
         optimized_route = _fast_2opt(final_route_np, dist_matrix, 50)
-        return optimized_route[:-1].tolist()
+        return optimized_route.tolist()
+
+    if final_route and not post_optimize:
+        final_route.append(final_route[0])
 
     return final_route
 
@@ -190,6 +193,9 @@ def hierarchical_tsp_simple(cities: np.ndarray, **kwargs) -> List[int]:
             cluster_indices = np.where(labels == cluster_idx)[0]
             if len(cluster_indices) > 0:
                 final_route.append(cluster_indices[0])
+
+        if final_route:
+            final_route.append(final_route[0])
 
         return final_route
 

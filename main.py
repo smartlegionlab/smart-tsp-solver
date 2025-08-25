@@ -13,7 +13,7 @@ def main():
     config = {
         'n_dots': 100,
         'seed': 123,
-        'dot_generation': 'random',
+        'dot_generation': 'cluster',
         'use_post_optimization': False,
         'plot_results': True,
         'verbose': True
