@@ -1,4 +1,4 @@
-# Smart TSP Solver <sup>v0.1.8</sup>
+# Smart TSP Solver <sup>v0.1.9</sup>
 
 ---
 
@@ -133,9 +133,9 @@ from smart_tsp_solver.algorithms.other.greedy.v2 import greedy_tsp_v2
 
 def main():
     config = {
-        'n_dots': 100,
+        'n_points': 1000,
         'seed': 123,
-        'dot_generation': 'random',
+        'point_generation': 'cluster',
         'use_post_optimization': False,
         'plot_results': True,
         'verbose': True
@@ -237,13 +237,6 @@ source venv/bin/activate
 pip install -r requirements.txt
 python main.py
 ```
-
-### Testing with different settings
-
-- change basic settings
-- add algorithms for comparison
-
-`python test.py`
 
 ## 📊 Comprehensive Performance Analysis
 
@@ -365,7 +358,7 @@ A commercial license is **required** for:
 ==================================================
           SMART TSP ALGORITHMS BENCHMARK          
 ==================================================
-Dots:           100
+Points:           100
 Seed:           123
 Generation:     cluster
 Post-opt:       OFF
@@ -443,7 +436,7 @@ PERFORMANCE ANALYSIS:
 ==================================================
           SMART TSP ALGORITHMS BENCHMARK          
 ==================================================
-Dots:           50
+Points:           50
 Seed:           123
 Generation:     random
 Post-opt:       OFF
@@ -517,7 +510,7 @@ PERFORMANCE ANALYSIS:
 ==================================================
           SMART TSP ALGORITHMS BENCHMARK          
 ==================================================
-Dots:           50
+Points:           50
 Seed:           123
 Generation:     cluster
 Post-opt:       OFF
@@ -591,7 +584,7 @@ PERFORMANCE ANALYSIS:
 ==================================================
           SMART TSP ALGORITHMS BENCHMARK          
 ==================================================
-Dots:           100
+Points:           100
 Seed:           123
 Generation:     random
 Post-opt:       OFF
@@ -665,7 +658,7 @@ PERFORMANCE ANALYSIS:
 ==================================================
           SMART TSP ALGORITHMS BENCHMARK          
 ==================================================
-Dots:           1001
+Points:           1001
 Seed:           123
 Generation:     random
 Post-opt:       OFF

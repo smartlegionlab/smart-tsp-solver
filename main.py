@@ -11,9 +11,9 @@ from smart_tsp_solver.algorithms.other.greedy.v2 import greedy_tsp_v2
 
 def main():
     config = {
-        'n_dots': 100,
+        'n_points': 100,
         'seed': 123,
-        'dot_generation': 'cluster',
+        'point_generation': 'cluster',
         'use_post_optimization': False,
         'plot_results': True,
         'verbose': True

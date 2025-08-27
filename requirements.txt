@@ -1,2 +1,2 @@
-smart-tsp-benchmark~=0.1.7
+smart-tsp-benchmark~=0.2.1
 numba==0.61.2
