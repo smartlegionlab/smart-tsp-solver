@@ -10,7 +10,6 @@ clustered data while maintaining practical computational efficiency.
 
 ![GitHub top language](https://img.shields.io/github/languages/top/smartlegionlab/smart-tsp-solver)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/smartlegionlab/smart-tsp-solver)](https://github.com/smartlegionlab/smart-tsp-solver/)
-[![GitHub](https://img.shields.io/github/license/smartlegionlab/smart-tsp-solver)](https://github.com/smartlegionlab/smart-tsp-solver/blob/master/LICENSE)
 [![GitHub Repo stars](https://img.shields.io/github/stars/smartlegionlab/smart-tsp-solver?style=social)](https://github.com/smartlegionlab/smart-tsp-solver/)
 [![GitHub watchers](https://img.shields.io/github/watchers/smartlegionlab/smart-tsp-solver?style=social)](https://github.com/smartlegionlab/smart-tsp-solver/)
 [![GitHub forks](https://img.shields.io/github/forks/smartlegionlab/smart-tsp-solver?style=social)](https://github.com/smartlegionlab/smart-tsp-solver/)
