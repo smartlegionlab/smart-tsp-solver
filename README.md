@@ -18,6 +18,10 @@ clustered data while maintaining practical computational efficiency.
 [![PyPI](https://img.shields.io/pypi/v/smart-tsp-solver)](https://pypi.org/project/smart-tsp-solver)
 [![PyPI - Format](https://img.shields.io/pypi/format/smart-tsp-solver)](https://pypi.org/project/smart-tsp-solver)
 
+[![PyPI Downloads](https://static.pepy.tech/badge/smart-tsp-solver)](https://pepy.tech/projects/smart-tsp-solver)
+[![PyPI Downloads](https://static.pepy.tech/badge/smart-tsp-solver/month)](https://pepy.tech/projects/smart-tsp-solver)
+[![PyPI Downloads](https://static.pepy.tech/badge/smart-tsp-solver/week)](https://pepy.tech/projects/smart-tsp-solver)
+
 ---
 
 > **Research-driven design:** This library implements cutting-edge spatial optimization 
