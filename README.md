@@ -1,4 +1,4 @@
-# Smart TSP Solver <sup>v0.2.0</sup>
+# Smart TSP Solver <sup>v0.2.1</sup>
 
 ---
 
@@ -9,6 +9,7 @@ clustered data while maintaining practical computational efficiency.
 ---
 
 ![GitHub top language](https://img.shields.io/github/languages/top/smartlegionlab/smart-tsp-solver)
+[![GitHub](https://img.shields.io/github/license/smartlegionlab/smart-tsp-solver)](https://github.com/smartlegionlab/smart-tsp-solver/blob/master/LICENSE)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/smartlegionlab/smart-tsp-solver)](https://github.com/smartlegionlab/smart-tsp-solver/)
 [![GitHub Repo stars](https://img.shields.io/github/stars/smartlegionlab/smart-tsp-solver?style=social)](https://github.com/smartlegionlab/smart-tsp-solver/)
 [![GitHub watchers](https://img.shields.io/github/watchers/smartlegionlab/smart-tsp-solver?style=social)](https://github.com/smartlegionlab/smart-tsp-solver/)
@@ -336,7 +337,7 @@ This project is licensed under the **GNU Affero General Public License v3.0 (AGP
 
 - You are free to use, modify, and distribute this software.
 - **However, if you modify this software and run it as a hosted service (e.g., a web app), you MUST make the full source code of your modified version available to your users under the same license.**
-- The full license text can be found in the **LICENSE** file.
+- The full license text can be found in the [LICENSE](https://github.com/smartlegionlab/smart-tsp-solver/blob/master/LICENSE) file.
 
 ### ⚠️ Important Disclaimer
 
